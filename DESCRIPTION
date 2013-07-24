@@ -1,0 +1,15 @@
+Package: mNest
+Type: Package
+Title: Calculates matrix nestedness and null models
+Version: 0.0
+Date: 2013-07-24
+Depends:
+    vegan,bipartite
+Author: Diego R. Barneche
+Maintainer: Diego R. Barneche <diego.barneche@mq.edu.au>
+Description: A package for calculating binary and quantitative nestedness 
+    and null models across different scales for different combination of ecological traits
+License: GPL
+Collate:
+    'import.R'
+    'dependencies.R'
