@@ -54,7 +54,7 @@ createTabs  <-  function(data, vals, target, scale, func, assign=FALSE, tabname)
   tab
 }
 
-#' Plots rarefaction curves with 95% CI
+#' Plots rarefaction curves with 95 percent CI
 #' @description Calculates sample-based rarefaction curves via function
 #'              \code{specaccum} from package \code{vegan}.
 #' @param data Central database
@@ -139,7 +139,7 @@ Mgen  <-  function (m, n=sum(m), zs = FALSE, rep.cell = TRUE) {
   }
 }
 
-#' Iterates over \{Mgen} algorithm
+#' Iterates over Mgen algorithm
 #' @description Iterates over \code{Mgen} for quantitative matrices. 
 #' @param m A quantitative matrix
 #' @param iter Number of iteractions, i.e. number of random matrices to be created
@@ -328,7 +328,7 @@ createNullTran  <-  function(matrices, names, ...){
   assign(paste0("n",names,".bin"),  lapply(matrices, function(mats)nullMatsVegan(m=mats, mtype="prab", ...)), pos=1)
 }
 
-#' Reports observed WNODF and NODF against 95%CI from null models
+#' Reports observed WNODF and NODF against 95 percent CI from null models
 #' @param bin A list of observed binary NODF summaries
 #' @param nullbin A list of random-generated binary NODF summaries
 #' @param quant A list of observed quantitative WNODF summaries
@@ -338,7 +338,7 @@ createNullTran  <-  function(matrices, names, ...){
 #'        Must be either 'site' or 'samples'
 #' @param addInfo if \code{output} is TRUE and \code{scales} is 'samples',
 #'        addInfo is incorporated into ouput name.
-#' @return a table of summaries comparing observed mean against 95%CI
+#' @return a table of summaries comparing observed mean against 95 percent CI
 #' @export
 reportNestedness  <-  function(bin, nullbin, quant, nullquant, output=TRUE, scales, addInfo){
   if(!missing(scales) && scales %in% c("site","samples")==FALSE)
