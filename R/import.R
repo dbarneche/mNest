@@ -1,24 +1,3 @@
-#' Evaluates existence of package
-#' @param package Name of package to be required or installed if not existing
-#' @param verbose If TRUE, print messages to screen, good for isolating problems
-#' @return loads or install and loads a package
-#' @export
-isPack  <-  function(package, verbose=FALSE){
-  if(verbose)cat("Does package", package, "exist?\n")
-  r <- invisible(require(package, quietly=TRUE, character.only=TRUE))
-  if(!r){
-    if(verbose)cat("It doesn't - trying to connect to CRAN, make sure you're connected to the internet otherwise you'll get an error message\n")
-    install.packages(package, quiet=TRUE)
-    f  <-  require(package, quietly=TRUE)
-    if(!f)
-      stop("Error: you're probably not connected to the internet or package name is not valid")
-    else
-      if(verbose)cat("Package", package, "succesfully installed\n")
-  } else {
-    if(verbose)cat("Yes it does - automatically required\n")
-  }
-}
-
 #' Read table
 #' @param filename Filename of central database
 #' @return Central database
@@ -84,8 +63,7 @@ createTabs  <-  function(data, vals, target, scale, func, assign=FALSE, tabname)
 #' @param permut Number of iterations
 #' @return individual plots for each site via \code{quartz} 
 #' @export
-plotRarefac  <-  function(data, x, ID, permut, ...){
-  isPack("vegan", ...)
+plotRarefac  <-  function(data, x, ID, permut){
   dat  <-  data[ID==x,]
   tab  <-  tapply(dat$abun, list(dat$transect_id, dat$code), sum); tab[is.na(tab)]<-0
   rar  <-  specaccum(tab, method="random", permutations=permut)
@@ -108,7 +86,6 @@ plotRarefac  <-  function(data, x, ID, permut, ...){
 nullMatsVegan <- function (m, iter, model, ...){
   if(model %in% 1:2 == FALSE)
     stop("Available models are numbered from 1 to 2")
-  isPack("vegan")
   if(model == 1)
     return(permatswap(m, times=iter, ...))
   else
@@ -122,7 +99,7 @@ nullMatsVegan <- function (m, iter, model, ...){
 #' @param zs logical. See \code{Details}
 #' @param rep.cell logical. See \code{Details}
 #' @return a randomized matrix
-#' @details \code{mgen} is general in the sense that it allows any type of probability matrix 
+#' @details \code{Mgen} is general in the sense that it allows any type of probability matrix 
 #'          to be used for constructing the simulated matrices. It does not, however, constrain rows 
 #'          and column totals, nor does it constrain connectance. If rep.cell=TRUE, repeated interactions
 #'          are added, thus generating a quantitative matrix with cell values as positive integers. 
@@ -134,7 +111,7 @@ nullMatsVegan <- function (m, iter, model, ...){
 #'          if FALSE, it returns a binary matrix.
 #' @references "Vázquez DP, Chacoff N and Cagnolo L (2009) Evaluating multiple determinants of the structure of mutualistic networks. Ecology, 90:2039-2046"
 #' @export
-mgen  <-  function (m, n=sum(m), zs = FALSE, rep.cell = TRUE) {
+Mgen  <-  function (m, n=sum(m), zs = FALSE, rep.cell = TRUE) {
   if (rep.cell == FALSE & n > (nrow(m) * ncol(m))) {
     message("Argument n should be smaller than the number of cells in matrix")
   } else {
@@ -162,11 +139,11 @@ mgen  <-  function (m, n=sum(m), zs = FALSE, rep.cell = TRUE) {
   }
 }
 
-#' Iterates over \{mgen} algorithm
-#' @description Iterates over \code{mgen} for quantitative matrices. 
+#' Iterates over \{Mgen} algorithm
+#' @description Iterates over \code{Mgen} for quantitative matrices. 
 #' @param m A quantitative matrix
 #' @param iter Number of iteractions, i.e. number of random matrices to be created
-#' @param ... Further arguments from \code{mgen}
+#' @param ... Further arguments from \code{Mgen}
 #' @return a list with iter random matrices
 #' @export
 nullMatsMgen <- function(m, iter, ...) {
@@ -175,7 +152,7 @@ nullMatsMgen <- function(m, iter, ...) {
   pmat <- (rowSums(m)) %*% t(colSums(m))/(sum(m))^2 
   null <- list()
   for(i in 1:iter){
-    null[[i]] <- mgen(pmat, n=sum(m), ...) 
+    null[[i]] <- Mgen(pmat, n=sum(m), ...) 
   }
   null  #all random matrices in a list
 }
@@ -288,6 +265,7 @@ nZeros  <-  function(matrix){
 #' @param x function used for comparison
 #' @param original Original matrix
 #' @param random One of the random matrices generated via \code{nullMatsVegan}
+#' @param ... additional arguments to \code{plot}
 #' @return A plot with the 1-1 line
 #' @export
 plotFuncDiff  <-  function(original, random, x, lim, ...){
@@ -316,7 +294,6 @@ summaryNODF  <-  function(matList, ...){
 matNODF  <-  function(x, summary=FALSE, ...){
   if(class(x)!="matrix" | length(x[x<0])>0)
     stop("x must be a matrix")
-  isPack("vegan")
   nest <- nestednodf(x, ...)
   if(summary)
     nest  <-  nest$statistic[3]
