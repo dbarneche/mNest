@@ -1,6 +1,6 @@
 \name{reportNestedness}
 \alias{reportNestedness}
-\title{Reports observed WNODF and NODF against 95%CI from null models.}
+\title{Reports observed WNODF and NODF against 95 per cent CI from null models.}
 \usage{
   reportNestedness(bin, nullbin, quant, nullquant, output=TRUE, scales, addInfo)
 }
@@ -21,6 +21,6 @@
   a table of summaries comparing observed mean against 95%CI
 }
 \description{
-  Reports observed WNODF and NODF against 95%CI from null models.
+  Reports observed WNODF and NODF against 95 per cent CI from null models.
 }
 
