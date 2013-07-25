@@ -26,7 +26,7 @@ Written by M.M.Pires, optmized by Barneche (in progress)}
   rows.
 }
 \references{
-  "Bascompte J, Jordano P, Melián CJ and Olesen JM (2003)
+  "Bascompte J, Jordano P, Melian CJ and Olesen JM (2003)
   The nested assembly of plant–animal mutualistic networks.
   PNAS, 100(16):9383-9387"
 }

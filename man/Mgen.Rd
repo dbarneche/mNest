@@ -39,7 +39,7 @@
   returns a binary matrix.
 }
 \references{
-  "Vázquez DP, Chacoff N and Cagnolo L (2009) Evaluating
+  "Vazquez DP, Chacoff N and Cagnolo L (2009) Evaluating
   multiple determinants of the structure of mutualistic
   networks. Ecology, 90:2039-2046"
 }

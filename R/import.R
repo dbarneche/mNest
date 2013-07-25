@@ -109,7 +109,7 @@ nullMatsVegan <- function (m, iter, model, ...){
 #'          it does not allow any column or row to be empty, i.e. sum up zero (default);
 #'          if TRUE, it does. If \code{rep.cell} is TRUE it returns a quantitative matrix (default);
 #'          if FALSE, it returns a binary matrix.
-#' @references "Vázquez DP, Chacoff N and Cagnolo L (2009) Evaluating multiple determinants of the structure of mutualistic networks. Ecology, 90:2039-2046"
+#' @references "Vazquez DP, Chacoff N and Cagnolo L (2009) Evaluating multiple determinants of the structure of mutualistic networks. Ecology, 90:2039-2046"
 #' @export
 Mgen  <-  function (m, n=sum(m), zs = FALSE, rep.cell = TRUE) {
   if (rep.cell == FALSE & n > (nrow(m) * ncol(m))) {
@@ -167,6 +167,8 @@ nullMatsMgen <- function(m, iter, ...) {
 #' @details Each cell has a probability of being filled that is proportional to the 
 #'          number of occurrences of individuals in sites: cij = 1/2*(Pi/C + Pj/R) 
 #'          where Pi= row sums; Pj = column sums; C = number of columns; and R = number of rows.
+#' @references "Bascompte J, Jordano P, Melian CJ and Olesen JM (2003) The nested assembly of 
+#'              plant–animal mutualistic networks. PNAS, 100(16):9383-9387"
 #' @export
 nullBinMats <- function(mat, iter=100){
   nR<-nrow(mat);    nC<-ncol(mat)
