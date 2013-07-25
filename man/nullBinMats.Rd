@@ -15,7 +15,7 @@ Written by M.M.Pires, optmized by Barneche (in progress)}
 }
 \description{
   This null created random matrices by randomly resorting
-  the 1’s among the matrix cells according to marginal
+  the 1's among the matrix cells according to marginal
   totals of rows and columns.
 }
 \details{
