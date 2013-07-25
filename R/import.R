@@ -159,7 +159,7 @@ nullMatsMgen <- function(m, iter, ...) {
 
 #' Generates null binary matrices following the null model 2 in Bascompte et al. 2003 PNAS. 
 #' Written by M.M.Pires, optmized by Barneche (in progress)
-#' @description This null created random matrices by randomly resorting the 1’s 
+#' @description This null created random matrices by randomly resorting the 1's 
 #'              among the matrix cells according to marginal totals of rows and columns.
 #' @param mat Binary matrix
 #' @param iter Number of iterations (recommended 1000)
