@@ -167,7 +167,6 @@ nullMatsMgen <- function(m, iter, ...) {
 #' @details Each cell has a probability of being filled that is proportional to the 
 #'          number of occurrences of individuals in sites: cij = 1/2*(Pi/C + Pj/R) 
 #'          where Pi= row sums; Pj = column sums; C = number of columns; and R = number of rows.
-#' @references "Bascompte J, Jordano P, Melián CJ and Olesen JM (2003) The nested assembly of  animal mutualistic networks. PNAS, 100(16):9383-9387"
 #' @export
 nullBinMats <- function(mat, iter=100){
   nR<-nrow(mat);    nC<-ncol(mat)
