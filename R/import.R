@@ -336,15 +336,12 @@ createNullTran  <-  function(matrices, names, ...){
 #' @param output should results be written to output folder? (default=TRUE)
 #' @param scales if \code{output} is TRUE, scales is incorporated into ouput name. 
 #'        Must be either 'site' or 'samples'
-#' @param addInfo if \code{output} is TRUE and \code{scales} is 'samples',
-#'        addInfo is incorporated into ouput name.
+#' @param addInfo if \code{output} is TRUE, addInfo is incorporated into ouput name.
 #' @return a table of summaries comparing observed mean against 95 percent CI
 #' @export
 reportNestedness  <-  function(bin, nullbin, quant, nullquant, output=TRUE, scales, addInfo){
   if(!missing(scales) && scales %in% c("site","samples")==FALSE)
     stop("Error: argument scales must be either 'site' or 'samples'")
-  if(scales=="site" && !missing(addInfo))
-    stop("Argument 'addInfo' only works if scales is 'samples'")
   if(!output && c(!missing(scales) | !missing(addInfo)))
     warning("Arguments scales and addInfo are only used if output=TRUE")
   obin  <-  unlist(bin)

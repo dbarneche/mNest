@@ -24,8 +24,8 @@
   incorporated into ouput name.  Must be either 'site' or
   'samples'}
 
-  \item{addInfo}{if \code{output} is TRUE and \code{scales}
-  is 'samples', addInfo is incorporated into ouput name.}
+  \item{addInfo}{if \code{output} is TRUE, addInfo is
+  incorporated into ouput name.}
 }
 \value{
   a table of summaries comparing observed mean against 95
