@@ -363,6 +363,7 @@ reportNestedness  <-  function(bin, nullbin, quant, nullquant, output=TRUE, scal
   }
 }
 
+
 #' Plot binary and quantitative matrices with a color code (in {phaget4})
 #' @param x matrix
 #' @param ... whatever parameters a plot function may receive
