@@ -7,8 +7,9 @@ Depends:
     vegan,bipartite
 Author: Diego R. Barneche
 Maintainer: Diego R. Barneche <diego.barneche@mq.edu.au>
-Description: A package for calculating binary and quantitative nestedness 
-    and null models across different scales for different combination of ecological traits
+Description: A package for calculating binary and quantitative nestedness and
+    null models across different scales for different combination of ecological
+    traits
 License: GPL
 Collate:
     'import.R'
