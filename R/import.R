@@ -2,7 +2,7 @@
 mNestStart  <-  function(dataDir = "datasets", FigsDir = "figures", OutsDir = "output"){
   list(dataDir  =  dataDir,
        FigsDir  =  FigsDir,
-       OutsDir  =  OutsDir,
+       OutsDir  =  OutsDir
   )
 }
 
