@@ -13,4 +13,3 @@ Description: A package for calculating binary and quantitative nestedness and
 License: GPL
 Collate:
     'import.R'
-    'dependencies.R'

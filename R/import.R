@@ -1,9 +1,32 @@
+#hidden function
+mNestStart  <-  function(dataDir = "datasets", FigsDir = "figures", OutsDir = "output"){
+  list(dataDir  =  dataDir,
+       FigsDir  =  FigsDir,
+       OutsDir  =  OutsDir,
+  )
+}
+
+#hidden function
+mNestIsSetup  <-  function(){
+  if(!exists(".mNestConfig")){
+    mNestConfig   <-  list()
+    assign(".mNestConfig", mNestStart(), envir = .GlobalEnv) 
+  }
+}
+
+
+#' @export
+mNestDetail <- function(detail){
+  mNestIsSetup()
+  .mNestConfig[[detail]]
+}
+
 #' Read table
 #' @param filename Filename of central database
 #' @return Central database
 #' @export
 bring  <-  function(filename){
-  data  <-  read.csv(paste0(dataDir,"/",filename,".csv"), h=TRUE, stringsAsFactors=FALSE, strip.white=TRUE, check.names=FALSE)
+  data  <-  read.csv(paste0(mNestDetail("dataDir"),"/",filename,".csv"), h=TRUE, stringsAsFactors=FALSE, strip.white=TRUE, check.names=FALSE)
   data
 }
 
@@ -357,7 +380,7 @@ reportNestedness  <-  function(bin, nullbin, quant, nullquant, output=TRUE, scal
       finalName  <-  paste0(scales,"_scale_nestedness")
     else
       finalName  <-  paste0(scales,"_scale_nestedness", addInfo)
-    write.csv(fin, paste0(OutsDir,"/", finalName, ".csv"))
+    write.csv(fin, paste0(mNestDetail("OutsDir"),"/", finalName, ".csv"))
   } else {
     fin
   }
