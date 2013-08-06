@@ -310,16 +310,20 @@ summaryNODF  <-  function(matList, ...){
 
 #' Calculates NODF of a matrix
 #' @param x a matrix
+#' @param summary obtains summary for whole matrix, row or column only
+#' @param index if summary=TRUE, \code{index} is applied on the statistic
+#'        list element of a obkect of class \code{nestednodf}. Default is 3,
+#'        i.e., whole matrix NODF
 #' @param ... optional arguments to \code{nestednodf}
 #' @return NODF
 #' @references ????
 #' @export
-matNODF  <-  function(x, summary=FALSE, ...){
+matNODF  <-  function(x, summary=FALSE, index=3, ...){
   if(class(x)!="matrix" | length(x[x<0])>0)
     stop("x must be a matrix")
   nest <- nestednodf(x, ...)
   if(summary)
-    nest  <-  nest$statistic[3]
+    nest  <-  nest$statistic[index]
   nest
 }
 
@@ -328,15 +332,16 @@ matNODF  <-  function(x, summary=FALSE, ...){
 #' @param fgLevels levels of traits combinations
 #' @param names Object tags to be pasted to each \code{fgLevels}
 #'        which will results in the object names
+#' @param ... optional arguments to \code{matNODF}
 #' @return assigns objects to global environment
 #' @export
-nestObjects  <-  function(x, fgLevels, names){
+nestObjects  <-  function(x, fgLevels, names, ...){
   for(i in seq_along(fgLevels)){
     obj  <-  x[[i]]
-    assign(paste0("wnodf_",names[i]),        lapply(obj, matNODF, weighted=TRUE,  order=TRUE), pos=1)
-    assign(paste0("wnodf_",names[i],"_sum"), lapply(obj, matNODF, weighted=TRUE,  order=TRUE, summary=TRUE), pos=1)
-    assign(paste0("nodf_",names[i]),         lapply(obj, matNODF, weighted=FALSE, order=TRUE), pos=1)
-    assign(paste0("nodf_",names[i],"_sum"),  lapply(obj, matNODF, weighted=FALSE, order=TRUE, summary=TRUE), pos=1)
+    assign(paste0("wnodf_",names[i]),        lapply(obj, matNODF, weighted=TRUE,  order=TRUE, ...), pos=1)
+    assign(paste0("wnodf_",names[i],"_sum"), lapply(obj, matNODF, weighted=TRUE,  order=TRUE, summary=TRUE, ...), pos=1)
+    assign(paste0("nodf_",names[i]),         lapply(obj, matNODF, weighted=FALSE, order=TRUE, ...), pos=1)
+    assign(paste0("nodf_",names[i],"_sum"),  lapply(obj, matNODF, weighted=FALSE, order=TRUE, summary=TRUE, ...), pos=1)
   }
 }
 
@@ -360,17 +365,18 @@ createNullTran  <-  function(matrices, names, ...){
 #' @param scales if \code{output} is TRUE, scales is incorporated into ouput name. 
 #'        Must be either 'site' or 'samples'
 #' @param addInfo if \code{output} is TRUE, addInfo is incorporated into ouput name.
+#' @param ... optional arguments to \code{matNODF}
 #' @return a table of summaries comparing observed mean against 95 percent CI
 #' @export
-reportNestedness  <-  function(bin, nullbin, quant, nullquant, output=TRUE, scales, addInfo){
+reportNestedness  <-  function(bin, nullbin, quant, nullquant, output=TRUE, scales, addInfo, ...){
   if(!missing(scales) && scales %in% c("site","samples")==FALSE)
     stop("Error: argument scales must be either 'site' or 'samples'")
   if(!output && c(!missing(scales) | !missing(addInfo)))
     warning("Arguments scales and addInfo are only used if output=TRUE")
   obin  <-  unlist(bin)
-  nbin  <-  sapply(nullbin, function(rands){summaryNODF(rands$perm, summary=TRUE)})
+  nbin  <-  sapply(nullbin, function(rands){summaryNODF(rands$perm, summary=TRUE, ...)})
   oqun  <-  unlist(quant)
-  nqun  <-  sapply(nullquant, function(rands){summaryNODF(rands$perm, summary=TRUE)})
+  nqun  <-  sapply(nullquant, function(rands){summaryNODF(rands$perm, summary=TRUE, ...)})
   fin   <-  rbind(t(rbind(obin,nbin)), t(rbind(oqun,nqun)))
   names <-  as.character(sapply(rownames(fin), function(x)strsplit(x,"[.]")[[1]][1]))
   rownames(fin)   <- paste0(names, rep(c("_nodf","_wnodf"), each=length(obin)))

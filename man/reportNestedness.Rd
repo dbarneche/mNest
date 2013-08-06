@@ -3,7 +3,7 @@
 \title{Reports observed WNODF and NODF against 95 percent CI from null models}
 \usage{
   reportNestedness(bin, nullbin, quant, nullquant,
-    output = TRUE, scales, addInfo)
+    output = TRUE, scales, addInfo, ...)
 }
 \arguments{
   \item{bin}{A list of observed binary NODF summaries}
@@ -26,6 +26,8 @@
 
   \item{addInfo}{if \code{output} is TRUE, addInfo is
   incorporated into ouput name.}
+
+  \item{...}{optional arguments to \code{matNODF}}
 }
 \value{
   a table of summaries comparing observed mean against 95
