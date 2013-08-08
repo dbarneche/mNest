@@ -336,6 +336,8 @@ matNODF  <-  function(x, summary=FALSE, index=3, ...){
 #' @return assigns objects to global environment
 #' @export
 nestObjects  <-  function(x, fgLevels, names, ...){
+  if(class(x) != "list") stop("x must be a list")
+  if(class(x[[1]]) != "list") x=list(x)
   for(i in seq_along(fgLevels)){
     obj  <-  x[[i]]
     assign(paste0("wnodf_",names[i]),        lapply(obj, matNODF, weighted=TRUE,  order=TRUE, ...), pos=1)
