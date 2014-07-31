@@ -196,11 +196,12 @@ nullMatsMgen <- function(m, iter, ...) {
 nullBinMats <- function(mat, iter=100){
   nR<-nrow(mat);    nC<-ncol(mat)
   mR<-rowSums(mat); mC<-colSums(mat)
+  if(identical(as.vector(mat),as.numeric(as.logical(mat)))==FALSE) stop("this function only takes binary matrices")
   #generating a matrix with probablities for each cell
   tR    <-  rep(mR, each=nC); tC<-rep(mC, nR)
   prob  <-  matrix(((tR/nC)+(tC/nR))/2, nR, nC, byrow=TRUE)
   #filling theoretical matrices
-  mat.t=array(0,c(m,n,iter)) #To store theoretical matrices
+  mat.t=array(0,c(nR,nC,iter)) #To store theoretical matrices
   s=1
   
   while (s<=iter){
